@@ -1,5 +1,7 @@
 <template>
     <v-container>
+
+        <!-- Botones superiores -->
         <v-layout row wrap>
             <v-flex xs12 sm6 class="text-xs-center text-sm-right">
                 <v-btn large router to="/cursos" class="info">Ver Cursos</v-btn>
@@ -8,7 +10,9 @@
                 <v-btn large router to="/curso/crear" class="info">Crear Curso</v-btn>
             </v-flex>
         </v-layout>
-        <v-layout row wrap>
+
+        <!-- Carousel -->
+        <v-layout row wrap class="mt-2">
             <v-flex xs12>
                 <v-carousel>
                     <v-carousel-item 
@@ -20,6 +24,13 @@
                         </div>    
                     </v-carousel-item>
                 </v-carousel>
+            </v-flex>
+        </v-layout>
+
+        <!-- Párrafo inferior -->
+        <v-layout row wrap class="mt-2">
+            <v-flex xs12 class="text-xs-center text-sm-right">
+                <p style="text-align:center">Disfruta dos nosos cursos!</p>
             </v-flex>
         </v-layout>
     </v-container>
