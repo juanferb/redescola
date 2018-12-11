@@ -15,7 +15,7 @@
     </v-navigation-drawer>
 
     <!-- Componente toolbar de Vuetify: Contenido fijo -->
-    <v-toolbar>
+    <v-toolbar dark class="primary">
       <v-toolbar-side-icon 
         @click="sideNav = !sideNav"
         class="hidden-sm-and-up">
@@ -25,7 +25,7 @@
       <v-toolbar-items
         class="hidden-xs-only">
         <v-btn flat>
-          <v-icon left>view_list</v-icon>
+          <v-icon left dark>view_list</v-icon>
           VER CURSOS
         </v-btn>
       </v-toolbar-items>
