@@ -2,10 +2,14 @@
   <v-app>
     <!-- Componente toolbar de Vuetify: Contenido fijo -->
     <v-toolbar>
-      <v-toolbar-side-icon @click="sideNav = !sideNav"></v-toolbar-side-icon>
+      <v-toolbar-side-icon 
+        @click="sideNav = !sideNav"
+        class="hidden-sm-and-up">
+      </v-toolbar-side-icon>
       <v-toolbar-title>Redescola</v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-toolbar-items>
+      <v-toolbar-items
+        class="hidden-xs-only">
         <v-btn flat>
           <v-icon left>view_list</v-icon>
           VER CURSOS
@@ -14,7 +18,8 @@
     </v-toolbar>
 
     <!-- Componente drawer de Vuetify: Contenido fijo, menú lateral -->
-    <v-navigation-drawer v-model="sideNav">
+    <v-navigation-drawer 
+      v-model="sideNav">
       <v-list>
         <v-list-tile>
           <v-list-tile-action>
