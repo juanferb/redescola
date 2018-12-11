@@ -1,5 +1,19 @@
 <template>
   <v-app>
+    <!-- Componente drawer de Vuetify: Contenido fijo, menú lateral -->
+    <v-navigation-drawer
+      fixed 
+      v-model="sideNav">
+      <v-list>
+        <v-list-tile>
+          <v-list-tile-action>
+            <v-icon>view_list</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>VER CURSOS</v-list-tile-content>
+        </v-list-tile>
+      </v-list>
+    </v-navigation-drawer>
+
     <!-- Componente toolbar de Vuetify: Contenido fijo -->
     <v-toolbar>
       <v-toolbar-side-icon 
@@ -16,19 +30,6 @@
         </v-btn>
       </v-toolbar-items>
     </v-toolbar>
-
-    <!-- Componente drawer de Vuetify: Contenido fijo, menú lateral -->
-    <v-navigation-drawer 
-      v-model="sideNav">
-      <v-list>
-        <v-list-tile>
-          <v-list-tile-action>
-            <v-icon>view_list</v-icon>
-          </v-list-tile-action>
-          <v-list-tile-content>VER CURSOS</v-list-tile-content>
-        </v-list-tile>
-      </v-list>
-    </v-navigation-drawer>
 
     <!-- Contenido dinámico -->
     <main> 
