@@ -55,9 +55,9 @@ export default {
     }
   },
   methods: {
-      onLoadCurso(id) {
-          this.$router.push('/cursos/' + id)
-      }
+    onLoadCurso (id) {
+      this.$router.push('/cursos/' + id)
+    }
   }
 }
 </script>
