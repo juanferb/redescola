@@ -9,10 +9,10 @@ import colors from 'vuetify/es5/util/colors'
 Vue.use(Vuetify,
   {
     theme: {
-      primary: colors.red.darken2,
+      primary: colors.purple.darken2,
       accent: colors.red.accent2,
       secondary: colors.grey.lighten2,
-      info: colors.blue.lighten1,
+      info: colors.purple.lighten1,
       warning: colors.amber.darken2,
       error: colors.red.accent4,
       success: colors.green.lighten2

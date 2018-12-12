@@ -1,5 +1,95 @@
 <template>
-    <div>
-        <p>Páxina de creación de cursos</p>
-    </div>
+  <v-container>
+    <v-layout row>
+      <v-flex xs12 sm6 offset-sm3>
+        <h2>Crear un curso</h2>
+      </v-flex>
+    </v-layout>
+    <v-layout row>
+      <v-flex xs12>
+        <form @submit.prevent="onCrearCurso">
+          <v-layout row>
+            <v-flex xs12 sm6 offset-sm3>
+              <v-text-field name="titulo" label="Titulo" id="titulo" v-model="titulo" required></v-text-field>
+            </v-flex>
+          </v-layout>
+          <v-layout row>
+            <v-flex xs12 sm6 offset-sm3>
+              <v-text-field name="lugar" label="Lugar" id="lugar" v-model="lugar" required></v-text-field>
+            </v-flex>
+          </v-layout>
+          <v-layout row>
+            <v-flex xs12 sm6 offset-sm3>
+              <v-text-field
+                name="imageUrl"
+                label="URL da imaxe"
+                id="image-url"
+                v-model="imageUrl"
+                required
+              ></v-text-field>
+            </v-flex>
+          </v-layout>
+          <v-layout row>
+            <v-flex xs12 sm6 offset-sm3>
+              <img :src="imageUrl" width="100%">
+            </v-flex>
+          </v-layout>
+          <v-layout row>
+            <v-flex xs12 sm6 offset-sm3>
+              <v-textarea
+                name="descripcion"
+                label="Descripcion"
+                id="descripcion"
+                v-model="descripcion"
+                multi-line
+                required
+              ></v-textarea>
+            </v-flex>
+          </v-layout>
+          <v-layout row>
+            <v-flex xs12 sm6 offset-sm3>
+                <v-btn class="primary" :disabled="!formIsValid" type="submit">Crear curso</v-btn>
+            </v-flex>
+          </v-layout>
+        </form>
+      </v-flex>
+    </v-layout>
+  </v-container>
 </template>
+
+<script>
+export default {
+  data () {
+    return {
+      titulo: '',
+      lugar: '',
+      imageUrl: '',
+      descripcion: ''
+    }
+  },
+  computed: {
+    formIsValid () {
+      return this.titulo !== '' &&
+      this.lugar !== '' &&
+      this.imageUrl !== '' &&
+      this.descripcion !== ''
+    }
+  },
+  methods: {
+    onCrearCurso () {
+      if (!this.formIsValid) {
+        return
+      }
+      const cursoData = {
+        titulo: this.titulo,
+        lugar: this.lugar,
+        imageUrl: this.imageUrl,
+        descripcion: this.descripcion,
+        fecha: new Date()
+      }
+      this.$store.dispatch('crearCurso', cursoData)
+      this.$router.push('/cursos')
+    }
+  }
+}
+</script>

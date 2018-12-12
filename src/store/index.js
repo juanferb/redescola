@@ -26,8 +26,25 @@ export const store = new Vuex.Store({
       cursosInscritos: ['2']
     }
   },
-  mutations: {},
-  actions: {},
+  mutations: {
+    crearCurso (state, payload) {
+      state.cursosCargados.push(payload)
+    }
+  },
+  actions: {
+    crearCurso ({commit}, payload) {
+      const curso = {
+        titulo: payload.titulo,
+        lugar: payload.lugar,
+        imageUrl: payload.imageUrl,
+        descripcion: payload.descripcion,
+        fecha: payload.fecha,
+        id: '3'
+      }
+      // Guardarlo en Firebase
+      commit('crearCurso', curso)
+    }
+  },
   getters: {
     cursosCargados (state) {
       return state.cursosCargados.sort((cursoA, cursoB) => {
