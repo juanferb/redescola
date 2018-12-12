@@ -11,14 +11,18 @@ export const store = new Vuex.Store({
          'https://static1.ideal.es/www/multimedia/201811/01/media/cortadas/movil-kFzD-U601417053636zZC-624x385@Ideal.jpg',
         id: '1',
         titulo: 'Curso móviles',
-        fecha: '2019-01-15'
+        fecha: '2019-01-15',
+        lugar: 'Ateneo',
+        descripcion: 'Todo sobre Android'
       },
       {
         imageUrl:
          'https://cdn.pixabay.com/photo/2017/04/26/16/06/mobile-2262928_960_720.jpg',
         id: '2',
         titulo: 'Curso móviles 2',
-        fecha: '2019-02-18'
+        fecha: '2019-02-18',
+        lugar: 'AAVV Ferrol Vello',
+        descripcion: 'Todo sobre Iphone'
       }
     ],
     usuario: {

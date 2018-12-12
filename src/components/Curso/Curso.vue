@@ -13,12 +13,8 @@
             height="400px"
           ></v-card-media>
           <v-card-text>
-            <div>{{ curso.fecha }}</div>
-            <div>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt eligendi nisi
-              obcaecati rerum mollitia esse sapiente, autem quia doloribus, fugit quam nobis
-              doloremque sed voluptatibus id quas vel fugiat exercitationem?
-            </div>
+            <div class="info--text">{{ curso.fecha }} - {{ curso.lugar }}</div>
+            <div>{{ curso.descripcion }}</div>
           </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
