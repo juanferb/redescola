@@ -13,8 +13,12 @@
     <!-- Carousel -->
     <v-layout row wrap class="mt-2">
       <v-flex xs12>
-        <v-carousel>
-          <v-carousel-item v-for="curso in cursos" :src="curso.imageUrl" :key="curso.id">
+        <v-carousel style="cursor: pointer;">
+          <v-carousel-item 
+            v-for="curso in cursos" 
+            :src="curso.imageUrl" 
+            :key="curso.id"
+            @click="onLoadCurso(curso.id)">
             <div class="title">{{ curso.title }}</div>
           </v-carousel-item>
         </v-carousel>
@@ -49,6 +53,11 @@ export default {
         }
       ]
     }
+  },
+  methods: {
+      onLoadCurso(id) {
+          this.$router.push('/cursos/' + id)
+      }
   }
 }
 </script>
