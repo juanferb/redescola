@@ -56,7 +56,6 @@
               <v-date-picker v-model="fecha" 
                 first-day-of-week="1"
                 locale="es"></v-date-picker>
-              <p>{{ fecha }}</p> 
             </v-flex>
           </v-layout>
           <v-layout row>
@@ -64,13 +63,11 @@
               <v-time-picker 
                 v-model="hora"
                 format="24hr"></v-time-picker>
-              <p>{{ hora }}</p>  
             </v-flex>
           </v-layout>
           <v-layout row>
             <v-flex xs12 sm6 offset-sm3>
                 <v-btn class="primary" :disabled="!formIsValid" type="submit">Crear curso</v-btn>
-                {{submittableDateTime}}
             </v-flex>
           </v-layout>
         </form>

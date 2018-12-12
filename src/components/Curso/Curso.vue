@@ -13,7 +13,7 @@
             height="400px"
           ></v-img>
           <v-card-text>
-            <div class="info--text">{{ curso.fecha }} - {{ curso.lugar }}</div>
+            <div class="info--text">{{ curso.fecha | fecha }} - {{ curso.lugar }}</div>
             <div>{{ curso.descripcion }}</div>
           </v-card-text>
           <v-card-actions>

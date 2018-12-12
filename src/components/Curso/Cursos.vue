@@ -12,7 +12,7 @@
                 <v-card-title primary>
                   <div>
                     <h2 class="white--text mb-0">{{ curso.titulo }}</h2>
-                    <div>{{ curso.fecha }}</div>
+                    <div>{{ curso.fecha | fecha }}</div>
                   </div>
                 </v-card-title>
                 <v-card-actions>
