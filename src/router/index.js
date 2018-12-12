@@ -3,6 +3,7 @@ import Router from 'vue-router'
  /* @ se refiere a src */
 import Inicio from '@/components/Inicio'
 import Cursos from '@/components/Curso/Cursos'
+import Curso from '@/components/Curso/Curso'
 import CrearCurso from '@/components/Curso/CrearCurso'
 import Perfil from '@/components/Usuario/Perfil'
 import Login from '@/components/Usuario/Login'
@@ -26,6 +27,11 @@ export default new Router({
       path: '/curso/crear',
       name: 'CrearCurso',
       component: CrearCurso
+    },
+    {
+      path: '/cursos/:id',
+      name: 'Curso',
+      component: Curso
     },
     {
       path: '/perfil',
