@@ -6,10 +6,7 @@
           <v-container fluid>
             <v-layout row>
               <v-flex xs5 sm4 md3>
-                <v-img
-                  :src="curso.imageUrl"
-                  height="130px"
-                ></v-img>
+                <v-img :src="curso.imageUrl" height="130px"></v-img>
               </v-flex>
               <v-flex xs7 sm8 md9>
                 <v-card-title primary>
@@ -19,9 +16,7 @@
                   </div>
                 </v-card-title>
                 <v-card-actions>
-                    <v-btn flat :to="'/cursos/' + curso.id" >
-                        Ver Curso
-                    </v-btn>
+                  <v-btn flat :to="'/cursos/' + curso.id">Ver Curso</v-btn>
                 </v-card-actions>
               </v-flex>
             </v-layout>
