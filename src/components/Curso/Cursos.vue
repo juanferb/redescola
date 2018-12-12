@@ -12,9 +12,9 @@
                 ></v-card-media>
               </v-flex>
               <v-flex xs7 sm8 md9>
-                <v-card-title primary-title>
+                <v-card-title primary>
                   <div>
-                    <h5 class="white--text mb-0">{{ curso.titulo }}</h5>
+                    <h2 class="white--text mb-0">{{ curso.titulo }}</h2>
                     <div>{{ curso.fecha }}</div>
                   </div>
                 </v-card-title>

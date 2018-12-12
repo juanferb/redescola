@@ -19,7 +19,7 @@
             :src="curso.imageUrl" 
             :key="curso.id"
             @click="onLoadCurso(curso.id)">
-            <div class="title">{{ curso.title }}</div>
+            <div class="title">{{ curso.titulo }}</div>
           </v-carousel-item>
         </v-carousel>
       </v-flex>
