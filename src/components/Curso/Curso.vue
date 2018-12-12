@@ -8,10 +8,10 @@
               <h2 class="primary--text">{{ curso.titulo }}</h2>
             </div>
           </v-card-title>
-          <v-card-media
+          <v-img
             :src="curso.imageUrl"
             height="400px"
-          ></v-card-media>
+          ></v-img>
           <v-card-text>
             <div class="info--text">{{ curso.fecha }} - {{ curso.lugar }}</div>
             <div>{{ curso.descripcion }}</div>
