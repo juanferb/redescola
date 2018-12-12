@@ -31,6 +31,7 @@ export default new Router({
     {
       path: '/cursos/:id',
       name: 'Curso',
+      props: true,
       component: Curso
     },
     {

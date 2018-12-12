@@ -5,15 +5,15 @@
         <v-card>
           <v-card-title primary-title>
             <div>
-              <h5 class="primary--text">Curso móviles</h5>
+              <h2 class="primary--text">{{ curso.titulo }}</h2>
             </div>
           </v-card-title>
           <v-card-media
-            src="https://static1.ideal.es/www/multimedia/201811/01/media/cortadas/movil-kFzD-U601417053636zZC-624x385@Ideal.jpg"
+            :src="curso.imageUrl"
             height="400px"
           ></v-card-media>
           <v-card-text>
-            <div>17 Jul 2019 - Ferrol</div>
+            <div>{{ curso.fecha }}</div>
             <div>
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt eligendi nisi
               obcaecati rerum mollitia esse sapiente, autem quia doloribus, fugit quam nobis
@@ -29,3 +29,15 @@
     </v-layout>
   </v-container>
 </template>
+
+<script>
+export default {
+  props: [ 'id' ],
+  computed: {
+    curso () {
+      return this.$store.getters.cursoCargado(this.id)
+    }
+  }
+}
+</script>
+
