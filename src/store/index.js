@@ -31,6 +31,9 @@ export const store = new Vuex.Store({
     error: null
   },
   mutations: {
+    setCursosCargados (state, payload) {
+      state.cursosCargados = payload
+    },
     crearCurso (state, payload) {
       state.cursosCargados.push(payload)
     },
@@ -47,18 +50,49 @@ export const store = new Vuex.Store({
       state.error = null
     }
   },
-  actions: {
+  actions: { // Código asíncrono (nunca ejecutamos código asíncrono en mutations)
+    cargarCursos ({commit}) {
+      firebase.database().ref('cursos').once('value')
+        .then((data) => {
+          const cursos = []
+          const obj = data.val()
+          for (let key in obj) {
+            cursos.push({
+              id: key,
+              titulo: obj[key].titulo,
+              descripcion: obj[key].descripcion,
+              imageUrl: obj[key].imageUrl,
+              fecha: obj[key].fecha
+            })
+          }
+          commit('setCursosCargados', cursos)
+        })
+        .catch(
+          (error) => {
+            console.log(error)
+          }
+        )
+    },
     crearCurso ({commit}, payload) {
       const curso = {
         titulo: payload.titulo,
         lugar: payload.lugar,
         imageUrl: payload.imageUrl,
         descripcion: payload.descripcion,
-        fecha: payload.fecha,
-        id: '3'
+        fecha: payload.fecha.toISOString()
       }
+      firebase.database().ref('cursos').push(curso)
+        .then((data) => {
+          const key = data.key
+          commit('crearCurso', {
+            ...curso,
+            id: key
+          })
+        })
+        .catch((error) => {
+          console.log(error)
+        })
       // Guardarlo en Firebase
-      commit('crearCurso', curso)
     },
     registrarUsuario ({commit}, payload) {
       commit('setCargando', true)

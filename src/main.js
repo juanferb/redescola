@@ -42,5 +42,6 @@ new Vue({
       projectId: 'redescola-c35ad',
       storageBucket: 'redescola-c35ad.appspot.com'
     })
+    this.$store.dispatch('cargarCursos')
   }
 })
