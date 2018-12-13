@@ -1,5 +1,75 @@
 <template>
-    <div>
-        <p>Páxina do login</p>
-    </div>
+  <v-container>
+    <v-layout row>
+      <v-flex xs12 sm6 offset-sm3>
+        <v-card-text>
+          <v-container>
+            <form @submit.prevent="onSignin">
+              <v-layout row>
+                <v-flex xs12>
+                  <v-text-field
+                    name="email"
+                    label="Mail"
+                    id="email"
+                    v-model="email"
+                    type="email"
+                    required>
+                  </v-text-field>
+                </v-flex>
+              </v-layout>
+              <v-layout row>
+                <v-flex xs12>
+                  <v-text-field
+                    name="password"
+                    label="Contrasinal"
+                    id="password"
+                    v-model="password"
+                    type="password"
+                    required>
+                  </v-text-field>
+                </v-flex>
+              </v-layout>
+              <v-layout row>
+                <v-flex xs12>
+                  <v-btn type="submit">Login</v-btn>
+                </v-flex>
+              </v-layout>
+            </form>
+          </v-container>
+        </v-card-text>
+      </v-flex>
+    </v-layout>
+  </v-container>
 </template>
+
+<script>
+export default {
+  data () {
+    return {
+      email: '',
+      password: ''
+    }
+  },
+  computed: {
+    usuario () {
+      return this.$store.getters.usuario
+    }
+  },
+  watch: {
+    usuario (value) {
+      if (value !== null && value !== undefined) {
+        this.$router.push('/')
+      }
+    }
+  },
+  methods: {
+    onSignin () {
+      this.$store.dispatch('loginUsuario', {
+        email: this.email,
+        password: this.password
+      })
+    }
+  }
+}
+</script>
+

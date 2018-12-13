@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import * as firebase from 'firebase'
 
 Vue.use(Vuex)
 
@@ -25,14 +26,14 @@ export const store = new Vuex.Store({
         descripcion: 'Todo sobre Iphone'
       }
     ],
-    usuario: {
-      id: '11111',
-      cursosInscritos: ['2']
-    }
+    usuario: null
   },
   mutations: {
     crearCurso (state, payload) {
       state.cursosCargados.push(payload)
+    },
+    setUsuario (state, payload) {
+      state.usuario = payload
     }
   },
   actions: {
@@ -47,6 +48,42 @@ export const store = new Vuex.Store({
       }
       // Guardarlo en Firebase
       commit('crearCurso', curso)
+    },
+    registrarUsuario ({commit}, payload) {
+      firebase.auth().createUserWithEmailAndPassword(
+        payload.email,
+        payload.password)
+        .then(
+          usuario => {
+            const nuevoUsuario = {
+              id: usuario.uid,
+              cursosInscritos: []
+            }
+            commit('setUsuario', nuevoUsuario)
+          }
+        )
+        .catch(
+          error => {
+            console.log(error)
+          }
+        )
+    },
+    loginUsuario ({commit}, payload) {
+      firebase.auth().signInWithEmailAndPassword(payload.email, payload.password)
+        .then(
+          usuario => {
+            const nuevoUsuario = {
+              id: usuario.uid,
+              cursosInscritos: []
+            }
+            commit('setUsuario', nuevoUsuario)
+          }
+        )
+        .catch(
+          error => {
+            console.log(error)
+          }
+        )
     }
   },
   getters: {
@@ -64,6 +101,9 @@ export const store = new Vuex.Store({
           return curso.id === cursoId
         })
       }
+    },
+    usuario (state) {
+      return state.usuario
     }
   }
 })

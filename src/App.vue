@@ -38,14 +38,27 @@
 export default {
   data () {
     return {
-      sideNav: false,
-      menuItems: [
-        { icon: 'view_list', title: 'Ver Cursos', link: '/cursos' },
-        { icon: 'room', title: 'Crear Curso', link: '/curso/crear' },
-        { icon: 'person', title: 'Perfil', link: '/perfil' },
+      sideNav: false
+    }
+  },
+  computed: {
+    menuItems () {
+      let menuItems = [
         { icon: 'face', title: 'Rexistro', link: '/rexistro' },
         { icon: 'lock_open', title: 'Login', link: '/login' }
       ]
+      if (this.usuarioEstaAutenticado) {
+        menuItems = [
+          { icon: 'view_list', title: 'Ver Cursos', link: '/cursos' },
+          { icon: 'room', title: 'Crear Curso', link: '/curso/crear' },
+          { icon: 'person', title: 'Perfil', link: '/perfil' }
+        ]
+      }
+      return menuItems
+    },
+    usuarioEstaAutenticado () {
+      return this.$store.getters.usuario !== null &&
+        this.$store.getters.usuario !== undefined
     }
   },
   name: 'App'

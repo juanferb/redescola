@@ -66,11 +66,24 @@ export default {
   computed: {
     compararPasswords () {
       return this.password !== this.confirmPassword ? 'As contrasinais non coinciden' : ''
+    },
+    usuario () {
+      return this.$store.getters.usuario
+    }
+  },
+  watch: {
+    usuario (value) {
+      if (value !== null && value !== undefined) {
+        this.$router.push('/')
+      }
     }
   },
   methods: {
     onSignup () {
-      // Vuex
+      this.$store.dispatch('registrarUsuario', {
+        email: this.email,
+        password: this.password
+      })
     }
   }
 }
