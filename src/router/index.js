@@ -8,6 +8,7 @@ import CrearCurso from '@/components/Curso/CrearCurso'
 import Perfil from '@/components/Usuario/Perfil'
 import Login from '@/components/Usuario/Login'
 import Rexistro from '@/components/Usuario/Rexistro'
+import AuthGuard from './auth-guard'
 
 Vue.use(Router)
 
@@ -26,7 +27,8 @@ export default new Router({
     {
       path: '/curso/crear',
       name: 'CrearCurso',
-      component: CrearCurso
+      component: CrearCurso,
+      beforeEnter: AuthGuard
     },
     {
       path: '/cursos/:id',
@@ -37,7 +39,8 @@ export default new Router({
     {
       path: '/perfil',
       name: 'Perfil',
-      component: Perfil
+      component: Perfil,
+      beforeEnter: AuthGuard
     },
     {
       path: '/login',
