@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import App from './App'
+import * as firebase from 'firebase'
 import router from './router'
 import { store } from './store'
 import Vuetify from 'vuetify'
@@ -30,5 +31,14 @@ new Vue({
   el: '#app',
   router,
   store,
-  render: h => h(App)
+  render: h => h(App),
+  created () {
+    firebase.initializeApp({
+      apiKey: 'AIzaSyDyJMV3g5dwUCW2GnWu5CpDFXxn92k0EFk',
+      authDomain: 'redescola-c35ad.firebaseapp.com',
+      databaseURL: 'https://redescola-c35ad.firebaseio.com',
+      projectId: 'redescola-c35ad',
+      storageBucket: 'redescola-c35ad.appspot.com'
+    })
+  }
 })
