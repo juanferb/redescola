@@ -26,7 +26,9 @@ export const store = new Vuex.Store({
         descripcion: 'Todo sobre Iphone'
       }
     ],
-    usuario: null
+    usuario: null,
+    cargando: false,
+    error: null
   },
   mutations: {
     crearCurso (state, payload) {
@@ -34,6 +36,15 @@ export const store = new Vuex.Store({
     },
     setUsuario (state, payload) {
       state.usuario = payload
+    },
+    setCargando (state, payload) {
+      state.cargando = payload
+    },
+    setError (state, payload) {
+      state.error = payload
+    },
+    clearError (state) {
+      state.error = null
     }
   },
   actions: {
@@ -50,11 +61,14 @@ export const store = new Vuex.Store({
       commit('crearCurso', curso)
     },
     registrarUsuario ({commit}, payload) {
+      commit('setCargando', true)
+      commit('clearError')
       firebase.auth().createUserWithEmailAndPassword(
         payload.email,
         payload.password)
         .then(
           usuario => {
+            commit('setCargando', false)
             const nuevoUsuario = {
               id: usuario.uid,
               cursosInscritos: []
@@ -64,14 +78,18 @@ export const store = new Vuex.Store({
         )
         .catch(
           error => {
-            console.log(error)
+            commit('setCargando', false)
+            commit('setError', error)
           }
         )
     },
     loginUsuario ({commit}, payload) {
+      commit('setCargando', true)
+      commit('clearError')
       firebase.auth().signInWithEmailAndPassword(payload.email, payload.password)
         .then(
           usuario => {
+            commit('setCargando', false)
             const nuevoUsuario = {
               id: usuario.uid,
               cursosInscritos: []
@@ -81,10 +99,16 @@ export const store = new Vuex.Store({
         )
         .catch(
           error => {
+            commit('setCargando', false)
+            commit('setError', error)
             console.log(error)
           }
         )
+    },
+    clearError ({commit}) {
+      commit('clearError')
     }
+
   },
   getters: {
     cursosCargados (state) {
@@ -104,6 +128,12 @@ export const store = new Vuex.Store({
     },
     usuario (state) {
       return state.usuario
+    },
+    cargando (state) {
+      return state.cargando
+    },
+    error (state) {
+      return state.error
     }
   }
 })
