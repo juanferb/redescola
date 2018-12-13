@@ -142,6 +142,9 @@ export const store = new Vuex.Store({
           }
         )
     },
+    autoLogin ({commit}, payload) {
+      commit('setUsuario', { id: payload.uid, cursosInscritos: [] })
+    },
     clearError ({commit}) {
       commit('clearError')
     }

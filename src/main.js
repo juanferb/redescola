@@ -42,6 +42,11 @@ new Vue({
       projectId: 'redescola-c35ad',
       storageBucket: 'redescola-c35ad.appspot.com'
     })
+    firebase.auth().onAuthStateChanged((usuario) => {
+      if (usuario) {
+        this.$store.dispatch('autoLogin', usuario)
+      }
+    })
     this.$store.dispatch('cargarCursos')
   }
 })
