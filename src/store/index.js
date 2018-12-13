@@ -145,6 +145,10 @@ export const store = new Vuex.Store({
     autoLogin ({commit}, payload) {
       commit('setUsuario', { id: payload.uid, cursosInscritos: [] })
     },
+    logout ({commit}) {
+      firebase.auth().signOut()
+      commit('setUsuario', null)
+    },
     clearError ({commit}) {
       commit('clearError')
     }

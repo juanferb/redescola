@@ -9,6 +9,12 @@
           </v-list-tile-action>
           <v-list-tile-content>{{ item.title }}</v-list-tile-content>
         </v-list-tile>
+        <v-list-tile v-if="usuarioEstaAutenticado" @click="onLogout">
+          <v-list-tile-action>
+            <v-icon>exit_to_app</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>Sair</v-list-tile-content>
+        </v-list-tile>
       </v-list>
     </v-navigation-drawer>
 
@@ -23,6 +29,10 @@
         <v-btn flat v-for="item in menuItems" :key="item.title" :to="item.link">
           <v-icon left dark>{{ item.icon }}</v-icon>
           {{ item.title }}
+        </v-btn>
+        <v-btn v-if="usuarioEstaAutenticado" flat @click="onLogout">
+          <v-icon left dark>exit_to_app</v-icon>
+          Sair
         </v-btn>
       </v-toolbar-items>
     </v-toolbar>
@@ -59,6 +69,11 @@ export default {
     usuarioEstaAutenticado () {
       return this.$store.getters.usuario !== null &&
         this.$store.getters.usuario !== undefined
+    }
+  },
+  methods: {
+    onLogout () {
+      this.$store.dispatch('logout')
     }
   },
   name: 'App'
