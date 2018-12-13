@@ -52,6 +52,7 @@ export const store = new Vuex.Store({
   },
   actions: { // Código asíncrono (nunca ejecutamos código asíncrono en mutations)
     cargarCursos ({commit}) {
+      commit('setCargando', true)
       firebase.database().ref('cursos').once('value')
         .then((data) => {
           const cursos = []
@@ -66,10 +67,12 @@ export const store = new Vuex.Store({
             })
           }
           commit('setCursosCargados', cursos)
+          commit('setCargando', false)
         })
         .catch(
           (error) => {
             console.log(error)
+            commit('setCargando', false)
           }
         )
     },
