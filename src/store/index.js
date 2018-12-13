@@ -63,7 +63,8 @@ export const store = new Vuex.Store({
               titulo: obj[key].titulo,
               descripcion: obj[key].descripcion,
               imageUrl: obj[key].imageUrl,
-              fecha: obj[key].fecha
+              fecha: obj[key].fecha,
+              idUsuarioCreador: obj[key].idUsuarioCreador
             })
           }
           commit('setCursosCargados', cursos)
@@ -76,13 +77,14 @@ export const store = new Vuex.Store({
           }
         )
     },
-    crearCurso ({commit}, payload) {
+    crearCurso ({commit, getters}, payload) {
       const curso = {
         titulo: payload.titulo,
         lugar: payload.lugar,
         imageUrl: payload.imageUrl,
         descripcion: payload.descripcion,
-        fecha: payload.fecha.toISOString()
+        fecha: payload.fecha.toISOString(),
+        idUsuarioCreador: getters.usuario.id
       }
       firebase.database().ref('cursos').push(curso)
         .then((data) => {
@@ -95,7 +97,6 @@ export const store = new Vuex.Store({
         .catch((error) => {
           console.log(error)
         })
-      // Guardarlo en Firebase
     },
     registrarUsuario ({commit}, payload) {
       commit('setCargando', true)
