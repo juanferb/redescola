@@ -10,7 +10,7 @@
       </v-flex>
     </v-layout>
 
-    <!-- Carousel -->
+    <!-- Spinner (Cargando) -->
     <v-layout>
       <v-flex xs12 class="text-xs-center">
         <v-progress-circular
@@ -22,6 +22,7 @@
         </v-progress-circular>
       </v-flex>
     </v-layout>
+    <!-- Carousel -->
     <v-layout row wrap class="mt-2">
       <v-flex xs12>
         <v-carousel style="cursor: pointer;" v-if="!cargando"> 

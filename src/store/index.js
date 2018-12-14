@@ -37,6 +37,20 @@ export const store = new Vuex.Store({
     crearCurso (state, payload) {
       state.cursosCargados.push(payload)
     },
+    actualizarCurso (state, payload) {
+      const curso = state.cursosCargados.find(curso => {
+        return curso.id === payload.id
+      })
+      if (payload.titulo) {
+        curso.titulo = payload.titulo
+      }
+      if (payload.descripcion) {
+        curso.descripcion = payload.descripcion
+      }
+      if (payload.fecha) {
+        curso.fecha = payload.fecha
+      }
+    },
     setUsuario (state, payload) {
       state.usuario = payload
     },
@@ -64,6 +78,7 @@ export const store = new Vuex.Store({
               descripcion: obj[key].descripcion,
               imageUrl: obj[key].imageUrl,
               fecha: obj[key].fecha,
+              lugar: obj[key].lugar,
               idUsuarioCreador: obj[key].idUsuarioCreador
             })
           }
@@ -114,6 +129,28 @@ export const store = new Vuex.Store({
         })
         .catch((error) => {
           console.log(error)
+        })
+    },
+    actualizarDatosCurso ({commit}, payload) {
+      commit('setCargando', true)
+      const updateObj = {}
+      if (payload.titulo) {
+        updateObj.titulo = payload.titulo
+      }
+      if (payload.descripcion) {
+        updateObj.descripcion = payload.descripcion
+      }
+      if (payload.fecha) {
+        updateObj.fecha = payload.fecha
+      }
+      firebase.database().ref('cursos').child(payload.id).update(updateObj)
+        .then(() => {
+          commit('setCargando', false)
+          commit('actualizarCurso', payload)
+        })
+        .catch(error => {
+          console.log(error)
+          commit('setCargando', false)
         })
     },
     registrarUsuario ({commit}, payload) {

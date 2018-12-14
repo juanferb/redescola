@@ -1,12 +1,25 @@
 <template>
   <v-container>
-    <v-layout row wrap>
+    <v-layout row wrap v-if="cargando">
+      <v-flex xs12 class="text-xs-center">
+        <v-progress-circular
+          indeterminate
+          class="primary--text"
+          :width="7"
+          :size="70"
+          v-if="cargando">
+        </v-progress-circular>
+      </v-flex>
+    </v-layout>
+    <v-layout row wrap v-else>
       <v-flex xs12>
         <v-card>
           <v-card-title primary-title>
-            <div>
-              <h2 class="primary--text">{{ curso.titulo }}</h2>
-            </div>
+              <h2 class="primary--text" xs6>{{ curso.titulo }}</h2>
+              <template v-if="usuarioEsCreador">
+                <v-spacer></v-spacer>
+                <app-editar-curso-detalles-dialog :curso="curso"></app-editar-curso-detalles-dialog>
+              </template>
           </v-card-title>
           <v-img
             :src="curso.imageUrl"
@@ -32,6 +45,19 @@ export default {
   computed: {
     curso () {
       return this.$store.getters.cursoCargado(this.id)
+    },
+    usuarioEstaAutenticado () {
+      return this.$store.getters.usuario !== null &&
+        this.$store.getters.usuario !== undefined
+    },
+    usuarioEsCreador () {
+      if (!this.usuarioEstaAutenticado) {
+        return false
+      }
+      return this.$store.getters.usuario.id === this.curso.idUsuarioCreador
+    },
+    cargando () {
+      return this.$store.getters.cargando
     }
   }
 }
