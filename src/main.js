@@ -53,6 +53,7 @@ new Vue({
     firebase.auth().onAuthStateChanged((usuario) => {
       if (usuario) {
         this.$store.dispatch('autoLogin', usuario)
+        this.$store.dispatch('fetchUserData')
       }
     })
     this.$store.dispatch('cargarCursos')
