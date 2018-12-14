@@ -11,6 +11,7 @@ import AlertCmp from './components/Shared/Alert.vue'
 import EditarCursoDetallesDialog from './components/Curso/Editar/EditarCursoDetallesDialog.vue'
 import EditarCursoFechaDialog from './components/Curso/Editar/EditarCursoFechaDialog.vue'
 import EditarCursoHoraDialog from './components/Curso/Editar/EditarCursoHoraDialog.vue'
+import InscripcionDialog from './components/Curso/Inscripcion/InscripcionDialog.vue'
 
 Vue.use(Vuetify,
   {
@@ -33,6 +34,7 @@ Vue.component('app-alert', AlertCmp)
 Vue.component('app-editar-curso-detalles-dialog', EditarCursoDetallesDialog)
 Vue.component('app-editar-curso-fecha-dialog', EditarCursoFechaDialog)
 Vue.component('app-editar-curso-hora-dialog', EditarCursoHoraDialog)
+Vue.component('app-inscripcion-dialog', InscripcionDialog)
 
 /* eslint-disable no-new */
 new Vue({

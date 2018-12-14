@@ -41,7 +41,7 @@
           </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn class="primary">Inscribirse</v-btn>
+            <app-inscripcion-dialog :cursoId="curso.id"></app-inscripcion-dialog>
           </v-card-actions>
         </v-card>
       </v-flex>

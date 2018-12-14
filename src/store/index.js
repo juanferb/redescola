@@ -31,6 +31,19 @@ export const store = new Vuex.Store({
     error: null
   },
   mutations: {
+    inscribirUsuarioEnCurso (state, payload) {
+      const id = payload.id
+      if (state.usuario.cursosInscritos.findIndex(curso => curso.id === id) >= 0) {
+        return
+      }
+      state.usuario.cursosInscritos.push(id)
+      state.usuario.fbKeys[id] = payload.fbKey
+    },
+    desinscribirUsuarioDeCurso (state, payload) {
+      const cursosInscritos = state.usuario.cursosInscritos
+      cursosInscritos.splice(cursosInscritos.findIndex(curso => curso.id === payload), 1)
+      Reflect.deleteProperty(state.usuario.fbKeys, payload)
+    },
     setCursosCargados (state, payload) {
       state.cursosCargados = payload
     },
@@ -65,6 +78,39 @@ export const store = new Vuex.Store({
     }
   },
   actions: { // Código asíncrono (nunca ejecutamos código asíncrono en mutations)
+    inscribirUsuarioEnCurso ({commit, getters}, payload) {
+      commit('setCargando', true)
+      const usuario = getters.usuario
+      firebase.database().ref('/usuarios/' + usuario.id).child('/inscripciones/')
+        .push(payload)
+        .then(data => {
+          commit('setCargando', false)
+          commit('inscribirUsuarioEnCurso', {id: payload, fbKey: data.key})
+        })
+        .catch(error => {
+          console.log(error)
+          commit('setCargando', false)
+        })
+    },
+    desinscribirUsuarioDeCurso ({commit, getters}, payload) {
+      commit('setCargando', true)
+      const usuario = getters.usuario
+      if (!usuario.fbKeys) {
+        return
+      }
+      const fbKey = usuario.fbKeys[payload]
+      firebase.database().ref('/usuarios/' + usuario.id + '/inscripciones/')
+        .child(fbKey)
+        .remove()
+        .then(() => {
+          commit('setCargando', false)
+          commit('desinscribirUsuarioDeCurso', payload)
+        })
+        .catch(error => {
+          console.log(error)
+          commit('setCargando', false)
+        })
+    },
     cargarCursos ({commit}) {
       commit('setCargando', true)
       firebase.database().ref('cursos').once('value')
@@ -164,7 +210,8 @@ export const store = new Vuex.Store({
             commit('setCargando', false)
             const nuevoUsuario = {
               id: usuario.uid,
-              cursosInscritos: []
+              cursosInscritos: [],
+              fbKeys: {}
             }
             commit('setUsuario', nuevoUsuario)
           }
@@ -185,7 +232,8 @@ export const store = new Vuex.Store({
             commit('setCargando', false)
             const nuevoUsuario = {
               id: usuario.uid,
-              cursosInscritos: []
+              cursosInscritos: [],
+              fbKeys: {}
             }
             commit('setUsuario', nuevoUsuario)
           }
@@ -199,7 +247,11 @@ export const store = new Vuex.Store({
         )
     },
     autoLogin ({commit}, payload) {
-      commit('setUsuario', { id: payload.uid, cursosInscritos: [] })
+      commit('setUsuario', {
+        id: payload.uid,
+        cursosInscritos: [],
+        fbKeys: {}
+      })
     },
     logout ({commit}) {
       firebase.auth().signOut()
