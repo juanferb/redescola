@@ -141,7 +141,7 @@ export const store = new Vuex.Store({
         updateObj.descripcion = payload.descripcion
       }
       if (payload.fecha) {
-        updateObj.fecha = payload.fecha
+        updateObj.fecha = payload.fecha.toISOString()
       }
       firebase.database().ref('cursos').child(payload.id).update(updateObj)
         .then(() => {

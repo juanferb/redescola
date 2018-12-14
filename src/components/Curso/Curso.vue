@@ -27,6 +27,16 @@
           ></v-img>
           <v-card-text>
             <div class="info--text">{{ curso.fecha | fecha }} - {{ curso.lugar }}</div>
+            <div>
+              <app-editar-curso-fecha-dialog
+                :curso="curso"
+                v-if="usuarioEsCreador">
+              </app-editar-curso-fecha-dialog>
+              <app-editar-curso-hora-dialog
+                v-if="usuarioEsCreador" 
+                :curso="curso">
+              </app-editar-curso-hora-dialog>
+            </div>
             <div>{{ curso.descripcion }}</div>
           </v-card-text>
           <v-card-actions>

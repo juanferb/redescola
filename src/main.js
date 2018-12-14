@@ -9,6 +9,8 @@ import colors from 'vuetify/es5/util/colors'
 import DateFilter from './filters/date'
 import AlertCmp from './components/Shared/Alert.vue'
 import EditarCursoDetallesDialog from './components/Curso/Editar/EditarCursoDetallesDialog.vue'
+import EditarCursoFechaDialog from './components/Curso/Editar/EditarCursoFechaDialog.vue'
+import EditarCursoHoraDialog from './components/Curso/Editar/EditarCursoHoraDialog.vue'
 
 Vue.use(Vuetify,
   {
@@ -29,6 +31,8 @@ Vue.config.productionTip = false
 Vue.filter('fecha', DateFilter)
 Vue.component('app-alert', AlertCmp)
 Vue.component('app-editar-curso-detalles-dialog', EditarCursoDetallesDialog)
+Vue.component('app-editar-curso-fecha-dialog', EditarCursoFechaDialog)
+Vue.component('app-editar-curso-hora-dialog', EditarCursoHoraDialog)
 
 /* eslint-disable no-new */
 new Vue({
