@@ -41,7 +41,9 @@
           </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <app-inscripcion-dialog :cursoId="curso.id"></app-inscripcion-dialog>
+            <app-inscripcion-dialog 
+              :cursoId="curso.id"
+              v-if="usuarioEstaAutenticado && !usuarioEsCreador"></app-inscripcion-dialog>
           </v-card-actions>
         </v-card>
       </v-flex>
